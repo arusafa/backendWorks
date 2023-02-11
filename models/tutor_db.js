@@ -5,13 +5,11 @@ const { isEmail } = require("validator")
 const register_tutor_schema = new mongoose.Schema({
     firstname:{
         type:String,
-        required:[true,"Please enter your first name"],
         maxLength:50,
         minLength:3
     },
     lastname:{
         type:String,
-        required:[true,"Please enter your last name"],
         maxLength:50
     },
     email:{
@@ -23,7 +21,6 @@ const register_tutor_schema = new mongoose.Schema({
     },
     phone:{
         type:Number,
-        required:[true,"Please enter your phone number"],
         maxLength:13
     },
     password:{

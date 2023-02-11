@@ -13,9 +13,6 @@ const Tutor = require("../models/tutor_db");
 }
 */
 
-
-
-
 routes.post("/login/tutor", (req, res) => {
   const { email, password } = req.body;
 
