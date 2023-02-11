@@ -11,7 +11,7 @@ routes.get("/register/tutor/result", async (req, res) => {
     res.status(201).json(data);
     console.log("Display all data");
   } catch (error) {
-    res.status(500).json({ message: "it didn't go through, please try again" });
+    res.status(500).json({error: error.message});
   }
 });
 
@@ -29,7 +29,7 @@ routes.post("/register/tutor", async (req, res) => {
     res.status(201).json(save_register);
     console.log("insert");
   } catch (error) {
-    res.status(400).json({ message: "it didn't go through, please try again" });
+    res.status(400).json({error: error.message});
   }
 });
 
@@ -41,7 +41,7 @@ routes.get("/register/tutor/:id", async (req, res) => {
     res.status(201).json(byDataid);
     console.log("id took it");
   } catch (error) {
-    res.status(500).json({ message: "it didn't go through, please try again" });
+    res.status(500).json({error: error.message});
   }
 });
 
@@ -69,7 +69,7 @@ routes.put("/register/tutor/:id", async (req, res) => {
     console.log("id updated it");
   } 
   catch (error) {
-    res.status(500).json({error});
+    res.status(500).json({error: error.message});
     console.log(error)
   }
 });
@@ -82,7 +82,7 @@ routes.delete("/register/tutor/:id", async (req, res) => {
     res.status(201).json(result);
     console.log("id has been deleted it");
   } catch (error) {
-    res.status(500).json({ message: "it didn't go through, please try again" });
+    res.status(500).json({error: error.message});
   }
 });
 
