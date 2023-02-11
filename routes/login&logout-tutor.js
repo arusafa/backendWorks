@@ -6,6 +6,16 @@ const cookkieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const Tutor = require("../models/tutor_db");
 
+/*
+{
+  "email":"test@testemail.com",
+  "password":"test@testemail.com"
+}
+*/
+
+
+
+
 routes.post("/login/tutor", (req, res) => {
   const { email, password } = req.body;
 
@@ -23,19 +33,26 @@ routes.post("/login/tutor", (req, res) => {
         const payload = {
           id: user.id,
           name: user.name,
+          email: user.email,
         };
-        const keys = "secret"
+        const keys = process.env.SECRET_KEY || "secret";
+
         // Sign token
         jwt.sign(
           payload,
-          keys.toString(),
+          keys,
           {
-            expiresIn: 31556926, // 1 year in seconds
+            expiresIn: "1d",
           },
           (err, token) => {
             if (err) {
               return res.status(500).json({ error: err.message });
             }
+
+            res.cookie("token", token, {
+              expires: new Date(Date.now() + 86400 * 1000),
+              httpOnly: true,
+            });
 
             return res.json({
               success: true,
@@ -44,9 +61,7 @@ routes.post("/login/tutor", (req, res) => {
           }
         );
       } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
+        return res.status(400).json({ error: "Password incorrect" });
       }
     });
   });
@@ -54,8 +69,8 @@ routes.post("/login/tutor", (req, res) => {
 
 // Logout
 routes.post("/logout/tutor", (req, res) => {
-  res.cookie("jwt", "", { maxAge: 1 });
-  console.log("logout");
+  res.clearCookie("XSRF-TOKEN");
+  res.json({ message: "Successfully logged out" });
 });
 
 module.exports = routes;

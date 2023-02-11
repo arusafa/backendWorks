@@ -67,3 +67,13 @@ register_tutor_schema.statics.login = async function(email,password){
 
 const register_tutor_members =mongoose.model("tutor",register_tutor_schema)
 module.exports=register_tutor_members
+
+/*
+{
+  "firstname":"testfirstanme",
+  "lastname":"testlast",
+  "email":"test@testemail.com",
+  "phone":"6473453212",
+  "password":"test@testemail.com"
+}
+*/
