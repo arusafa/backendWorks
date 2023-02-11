@@ -30,7 +30,6 @@ const register_tutor_schema = new mongoose.Schema({
         type:String,
         required:[true,"Please enter your password"],
         minLength:[6,"Password must be at least 6 characters long"],
-        maxLength:20
     },
     isAccountVerified: {
         type: String,
